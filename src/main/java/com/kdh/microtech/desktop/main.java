@@ -1,7 +1,9 @@
 package com.kdh.microtech.desktop;
+import javax.swing.*;
 
 public class main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        Jframe frame = new Jframe();
+        frame.setVisible(true); 
     }
 }
