@@ -148,7 +148,7 @@ public class Login extends javax.swing.JPanel {
         jLabel4.setText("forgot password?");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/user.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/user.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 30, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

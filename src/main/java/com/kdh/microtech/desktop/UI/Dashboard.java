@@ -53,6 +53,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -67,7 +69,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(42, 39, 41));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/hasinisamarathunga/Desktop/microtech-desktop/images/home.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/home.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 30, 30));
 
@@ -86,7 +88,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(42, 39, 41));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("/Users/hasinisamarathunga/Desktop/microtech-desktop/images/009.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/009.png"))); // NOI18N
         jLabel4.setText("jLabel1");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 30, 30));
 
@@ -104,7 +106,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(42, 39, 41));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("/Users/hasinisamarathunga/Desktop/microtech-desktop/images/delivery.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/delivery.png"))); // NOI18N
         jLabel7.setText("jLabel1");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 30, 30));
 
@@ -114,7 +116,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel9.setText("Home");
+        jLabel9.setText("Orders");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 180, 50));
@@ -122,7 +124,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(42, 39, 41));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setIcon(new javax.swing.ImageIcon("/Users/hasinisamarathunga/Desktop/microtech-desktop/images/002_1.png")); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/002_1.png"))); // NOI18N
         jLabel10.setText("jLabel1");
         jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 30, 30));
 
@@ -132,7 +134,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel12.setText("Home");
+        jLabel12.setText("Search");
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 50));
@@ -140,7 +142,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(42, 39, 41));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setIcon(new javax.swing.ImageIcon("/Users/hasinisamarathunga/Desktop/microtech-desktop/images/007.png")); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/007.png"))); // NOI18N
         jLabel13.setText("jLabel1");
         jPanel7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 30, 30));
 
@@ -158,7 +160,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(42, 39, 41));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel16.setIcon(new javax.swing.ImageIcon("/Users/hasinisamarathunga/Desktop/microtech-desktop/images/006.png")); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/006.png"))); // NOI18N
         jLabel16.setText("jLabel1");
         jPanel8.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 30, 30));
 
@@ -176,17 +178,17 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 550));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Products");
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 105, -1));
+
+        jLabel20.setBackground(new java.awt.Color(102, 102, 255));
+        jLabel20.setOpaque(true);
+        jPanel9.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 10));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 720, 120));
 
@@ -194,7 +196,7 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +253,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
