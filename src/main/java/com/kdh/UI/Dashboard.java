@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.kdh.microtech.desktop.UI;
+package com.kdh.UI;
+
+import java.awt.Color;
+import javax.swing.JLabel;
 
 /**
  *
@@ -55,6 +58,14 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jInternalFrame2 = new javax.swing.JInternalFrame();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -67,6 +78,17 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(42, 39, 41));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel3MouseExited(evt);
+            }
+        });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/icons/home.png"))); // NOI18N
@@ -190,7 +212,46 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel20.setOpaque(true);
         jPanel9.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 10));
 
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/icons/logo.png"))); // NOI18N
+        jLabel21.setText("jLabel21");
+        jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 290, 90));
+
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 720, 120));
+
+        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jInternalFrame1.setBorder(null);
+        jInternalFrame1.setVisible(true);
+        jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setBackground(new java.awt.Color(0, 0, 51));
+        jLabel22.setText("Home");
+        jPanel10.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 60, 30));
+
+        jInternalFrame1.getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 730, 460));
+
+        jDesktopPane1.add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
+
+        jInternalFrame2.setBorder(null);
+        jInternalFrame2.setVisible(false);
+        jInternalFrame2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel23.setText("Inventory");
+        jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+
+        jInternalFrame2.getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 730, 460));
+
+        jDesktopPane1.add(jInternalFrame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
+        jInternalFrame2.getAccessibleContext().setAccessibleName("0");
+        jInternalFrame2.getAccessibleContext().setAccessibleDescription("0");
+
+        jPanel1.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 720, 430));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +267,32 @@ public class Dashboard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        bar(jLabel2);
+        jInternalFrame1.setVisible(true);
+        jInternalFrame2.setVisible(false);
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        jPanel3.setBackground(Color.decode("#565255"));
+    }//GEN-LAST:event_jPanel3MouseEntered
+
+    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
+        jPanel3.setBackground(Color.decode("#2a2729"));
+
+    }//GEN-LAST:event_jPanel3MouseExited
+
+    public void bar(JLabel lab) {
+        jLabel2.setOpaque(false);
+        jLabel5.setOpaque(false);
+        jLabel8.setOpaque(false);
+        jLabel11.setOpaque(false);
+        jLabel14.setOpaque(false);
+        jLabel17.setOpaque(false);
+        lab.setOpaque(true);
+        jPanel2.repaint();
+    }
 
     /**
      * @param args the command line arguments
@@ -243,6 +330,9 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -256,6 +346,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -264,6 +357,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

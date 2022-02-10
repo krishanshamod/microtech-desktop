@@ -1,5 +1,4 @@
 package com.kdh;
-
 import com.kdh.database.DataRetriever;
 import com.kdh.database.SQLDatabase;
 import java.sql.Connection;
