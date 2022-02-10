@@ -102,7 +102,7 @@
                   <Font name="DIN Alternate" size="24" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/com/kdh/microtech/desktop/icons/logo.png"/>
+                  <Image iconType="3" name="/com/kdh/icons/logo.png"/>
                 </Property>
               </Properties>
             </Component>

@@ -70,7 +70,7 @@ public class Signup extends javax.swing.JPanel {
         jPanel2.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("DIN Alternate", 1, 24)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/microtech/desktop/icons/logo.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/icons/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
