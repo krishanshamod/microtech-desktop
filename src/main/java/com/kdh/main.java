@@ -1,4 +1,4 @@
-package com.kdh.microtech.desktop;
+package com.kdh;
 
 public class main {
     public static void main(String[] args) {
