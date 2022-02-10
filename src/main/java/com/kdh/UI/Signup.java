@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.kdh.microtech.desktop.UI;
+package com.kdh.UI;
 
-import com.kdh.microtech.desktop.*;
+import com.kdh.*;
 
 /**
  *

@@ -1,7 +1,16 @@
-package com.kdh.microtech.desktop;
+package com.kdh;
+
+import com.kdh.database.DataRetriever;
+import com.kdh.database.SQLDatabase;
+import java.sql.Connection;
 
 public class main {
     public static void main(String[] args) {
+        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
+        Connection connection = sqldatabase.getConnection();
+        DataRetriever dataRetriever = new DataRetriever(connection);
+        dataRetriever.getData();
 
+        
     }
 }
