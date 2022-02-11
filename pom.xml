@@ -13,11 +13,12 @@
         </repository>
     </repositories>
     <dependencies>
-        
+
+        <!-- https://mvnrepository.com/artifact/org.netbeans.external/AbsoluteLayout -->
         <dependency>
-            <groupId>unknown.binary</groupId>
+            <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
+            <version>RELEASE126</version>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->

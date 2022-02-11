@@ -29,7 +29,7 @@ public class DataRetriever {
 
                 // Get the data from the current row using the column name - column data are in the VARCHAR format
 
-                data = results.getString("test_col");
+                data = results.getString("addr_line1");
 
                 System.out.println("Fetching data by column name for row " + results.getRow() + " : " + data);
 
