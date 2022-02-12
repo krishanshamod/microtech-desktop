@@ -55,6 +55,7 @@ public class SignupUI extends javax.swing.JFrame {
         jPanel3.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("DIN Alternate", 1, 24)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
