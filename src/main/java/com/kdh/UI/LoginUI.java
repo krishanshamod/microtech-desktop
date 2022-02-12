@@ -30,6 +30,7 @@ public class LoginUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -51,7 +52,7 @@ public class LoginUI extends javax.swing.JFrame {
         jPanel3.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("DIN Alternate", 1, 24)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/icons/logo.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -71,6 +72,10 @@ public class LoginUI extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel6.setText("Log In");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 80, 28));
 
         jTextField1.setBackground(new java.awt.Color(102, 102, 255));
         jTextField1.setText("Username");
@@ -93,7 +98,7 @@ public class LoginUI extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 182, 154, 10));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/icons/lock.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lock.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 30, 30));
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
@@ -137,7 +142,7 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel4.setText("forgot password?");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/kdh/icons/user.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 30, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -220,6 +225,7 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
