@@ -1,5 +1,8 @@
 package com.kdh;
 import com.kdh.UI.LoginUI;
+import com.kdh.UI.Dashboard;
+import com.kdh.UI.SignupUI;
+
 import com.kdh.database.DataRetriever;
 import com.kdh.database.SQLDatabase;
 import java.sql.Connection; 
@@ -13,7 +16,7 @@ public class main {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginUI().setVisible(true);
+                new Dashboard().setVisible(true);
             }
         });
     }
