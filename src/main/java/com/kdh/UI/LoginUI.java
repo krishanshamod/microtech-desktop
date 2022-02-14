@@ -4,6 +4,11 @@
  */
 package com.kdh.UI;
 
+import com.kdh.database.DataRetriever;
+import com.kdh.database.SQLDatabase;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hasinisamarathunga
@@ -31,8 +36,8 @@ public class LoginUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtusername = new javax.swing.JTextField();
+        pwd = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -77,20 +82,30 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel6.setText("Log In");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 80, 28));
 
-        jTextField1.setBackground(new java.awt.Color(102, 102, 255));
-        jTextField1.setText("Username");
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        txtusername.setBackground(new java.awt.Color(102, 102, 255));
+        txtusername.setText("Username");
+        txtusername.setBorder(null);
+        txtusername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtusernameFocusGained(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 97, 154, 30));
+        txtusername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusernameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 97, 154, 30));
 
-        jPasswordField1.setBackground(new java.awt.Color(102, 102, 255));
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBorder(null);
-        jPanel2.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 154, 30));
+        pwd.setBackground(new java.awt.Color(102, 102, 255));
+        pwd.setText("jPasswordField1");
+        pwd.setBorder(null);
+        pwd.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pwdFocusGained(evt);
+            }
+        });
+        jPanel2.add(pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 154, 30));
 
         jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 154, 20));
@@ -106,6 +121,11 @@ public class LoginUI extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("      Log In");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -180,9 +200,42 @@ public class LoginUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
+        
+    }//GEN-LAST:event_txtusernameActionPerformed
+
+    private void txtusernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtusernameFocusGained
+       txtusername.setText("");
+    }//GEN-LAST:event_txtusernameFocusGained
+
+    private void pwdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pwdFocusGained
+        pwd.setText("");
+    }//GEN-LAST:event_pwdFocusGained
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        String userValue = txtusername.getText();       
+        String passValue = pwd.getText();
+
+        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
+        Connection connection = sqldatabase.getConnection();
+        DataRetriever dataRetriever = new DataRetriever(connection);
+        boolean hasFoundAMatch = dataRetriever.validateLoginData(userValue , passValue);
+        
+        if(hasFoundAMatch) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Dashboard().setVisible(true);
+                setVisible(false); 
+                dispose(); 
+            }
+        });
+            
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Incorrect Username or Password,\n Please enter valid Credentials","Error",1);
+        }
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,9 +285,9 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField pwd;
+    private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 }
