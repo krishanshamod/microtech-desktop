@@ -6,20 +6,39 @@ package com.kdh.UI;
 
 import java.awt.Color;
 import javax.swing.JLabel;
-
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author hasinisamarathunga
  */
 public class Dashboard extends javax.swing.JFrame {
-
+    
+    DefaultTableModel dm;
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
-        initComponents();
+        initComponents(); 
+        
+        CreateTableColumns();
     }
-
+    
+    private void CreateTableColumns () {
+        dm= (DefaultTableModel)jTable1.getModel();
+        
+        //Add Cols
+        dm.addColumn("Item Name");
+        dm.addColumn("Category");
+        dm.addColumn("Brand");
+        dm.addColumn("Item Price");
+    }
+    
+    //Add row data
+    private void Populate(String name, String cat, String brand, String price){
+        
+        String[] rowData = {name,cat,brand,price};
+        dm.addRow(rowData);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,7 +85,20 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jInternalFrame2 = new javax.swing.JInternalFrame();
         jPanel11 = new javax.swing.JPanel();
+        removeRow = new javax.swing.JButton();
+        addRow = new javax.swing.JButton();
+        updateRow = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        priceText = new javax.swing.JTextField();
+        nameText = new javax.swing.JTextField();
+        catText = new javax.swing.JTextField();
+        brandText = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jInternalFrame3 = new javax.swing.JInternalFrame();
         jPanel13 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -304,7 +336,7 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jInternalFrame1.setBorder(null);
-        jInternalFrame1.setVisible(true);
+        jInternalFrame1.setVisible(false);
         jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -319,16 +351,88 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
 
         jInternalFrame2.setBorder(null);
-        jInternalFrame2.setVisible(false);
+        jInternalFrame2.setVisible(true);
         jInternalFrame2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setText("Inventory");
-        jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        removeRow.setBackground(new java.awt.Color(204, 204, 255));
+        removeRow.setText("Remove");
+        removeRow.setToolTipText("");
+        removeRow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeRowMouseClicked(evt);
+            }
+        });
+        removeRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeRowActionPerformed(evt);
+            }
+        });
+        jPanel11.add(removeRow, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 140, 40));
 
-        jInternalFrame2.getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 730, 460));
+        addRow.setText("Add");
+        addRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRowActionPerformed(evt);
+            }
+        });
+        jPanel11.add(addRow, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 140, 40));
+
+        updateRow.setText("Update");
+        updateRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateRowActionPerformed(evt);
+            }
+        });
+        jPanel11.add(updateRow, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 140, 40));
+
+        jLabel29.setText("Item Price  :");
+        jPanel11.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        jLabel30.setText("Item Name : ");
+        jPanel11.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+
+        jLabel31.setText("Category    : ");
+        jPanel11.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+
+        jLabel32.setText("Brand         : ");
+        jPanel11.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+        jPanel11.add(priceText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 270, -1));
+        jPanel11.add(nameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 270, -1));
+
+        catText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                catTextActionPerformed(evt);
+            }
+        });
+        jPanel11.add(catText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 270, -1));
+        jPanel11.add(brandText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 270, -1));
+
+        jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 640, 180));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.setSelectionBackground(new java.awt.Color(102, 102, 255));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel11.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 640, 170));
+
+        jInternalFrame2.getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 13, 720, 460));
 
         jDesktopPane1.add(jInternalFrame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
         jInternalFrame2.getAccessibleContext().setAccessibleName("0");
@@ -523,6 +627,51 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel8.setBackground(Color.decode("#2a2729"));
     }//GEN-LAST:event_jPanel8MouseExited
 
+    private void catTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_catTextActionPerformed
+
+    private void removeRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRowActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRowActionPerformed
+
+    private void addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowActionPerformed
+        Populate(nameText.getText(), catText.getText(), brandText.getText(), priceText.getText());
+        
+        //CLEAR TEXT
+        nameText.setText(""); 
+        catText.setText("");
+        brandText.setText("");
+        priceText.setText("");
+    }//GEN-LAST:event_addRowActionPerformed
+    
+    //UPDATE
+    private void updateRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRowActionPerformed
+        dm.setValueAt(nameText.getText(), jTable1.getSelectedRow(),0);
+        dm.setValueAt(catText.getText(), jTable1.getSelectedRow(),1);
+        dm.setValueAt(brandText.getText(), jTable1.getSelectedRow(),2);
+        dm.setValueAt(priceText.getText(), jTable1.getSelectedRow(),3);
+        
+        //CLEAR TEXT
+        nameText.setText(""); 
+        catText.setText("");
+        brandText.setText("");
+        priceText.setText("");
+    }//GEN-LAST:event_updateRowActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        nameText.setText(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString()); 
+        catText.setText(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString());
+        brandText.setText(jTable1.getValueAt(jTable1.getSelectedRow(),2).toString());
+        priceText.setText(jTable1.getValueAt(jTable1.getSelectedRow(),3).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+    
+    //REMOVE
+    private void removeRowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRowMouseClicked
+        dm.removeRow(jTable1.getSelectedRow());
+    }//GEN-LAST:event_removeRowMouseClicked
+
+  
     public void bar(JLabel lab) {
         jLabel2.setOpaque(false);
         jLabel5.setOpaque(false);
@@ -534,42 +683,10 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2.repaint();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dashboard().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addRow;
+    private javax.swing.JTextField brandText;
+    private javax.swing.JTextField catText;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
@@ -598,7 +715,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -620,5 +741,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField nameText;
+    private javax.swing.JTextField priceText;
+    private javax.swing.JButton removeRow;
+    private javax.swing.JButton updateRow;
     // End of variables declaration//GEN-END:variables
 }
