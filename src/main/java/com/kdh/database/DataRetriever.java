@@ -3,6 +3,8 @@ package com.kdh.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.security.MessageDigest;
+import javax.xml.bind.DatatypeConverter;
 
 public class DataRetriever {
     Connection connection;
@@ -11,33 +13,29 @@ public class DataRetriever {
         this.connection = connection;
     }
 
-    public void getData() {
+    public boolean validateLoginData(String uname, String pwd) {
         System.out.println("Retrieving data from the database...");
+        boolean hasFoundAMatch = false;
+
         try {
+            
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(pwd.getBytes());
+            byte[] digest = md.digest();
+            String Hashedpwd = DatatypeConverter.printHexBinary(digest).toUpperCase();
+            System.out.println(Hashedpwd);
+            
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM address");
-
+            ResultSet results = statement.executeQuery("SELECT * FROM admins WHERE f_name = '" + uname +"' AND passwd ='" + Hashedpwd + "'");
+            
             while (results.next()) {
-
-
-                // Get the data from the current row using the column index - column data are in the VARCHAR format
-
-                String data = results.getString(1);
-
-                System.out.println("Fetching data by column index for row " + results.getRow() + " : " + data);
-
-
-                // Get the data from the current row using the column name - column data are in the VARCHAR format
-
-                data = results.getString("addr_line1");
-
-                System.out.println("Fetching data by column name for row " + results.getRow() + " : " + data);
-
-
+                hasFoundAMatch = true;           
             }
+            
         } catch (Exception e) {
             System.out.println("Error retrieving data from the database: " + e.getMessage());
         }
+        return hasFoundAMatch;
     }
 
 

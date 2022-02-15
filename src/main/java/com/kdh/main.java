@@ -12,7 +12,6 @@ public class main {
         SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost/microtech", "root", "");
         Connection connection = sqldatabase.getConnection();
         DataRetriever dataRetriever = new DataRetriever(connection);
-        dataRetriever.getData();
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
