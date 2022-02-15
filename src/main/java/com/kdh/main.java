@@ -15,7 +15,7 @@ public class main {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                new LoginUI().setVisible(true);
             }
         });
     }
