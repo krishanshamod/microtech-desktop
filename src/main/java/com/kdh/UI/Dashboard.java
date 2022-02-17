@@ -18,13 +18,19 @@ import javax.swing.table.DefaultTableModel;
 public class Dashboard extends javax.swing.JFrame {
     
     DefaultTableModel dm;
+    SQLDatabase sqldatabase;
+    DataModifier dataModifier;
+    Connection connection;
+    
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents(); 
-        
         CreateTableColumns();
+        this.sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
+        this.connection = sqldatabase.getConnection();
+        this.dataModifier = new DataModifier(connection);
     }
     
     private void CreateTableColumns () {
@@ -44,22 +50,8 @@ public class Dashboard extends javax.swing.JFrame {
         dm.addRow(rowData);
         
         //Add
-//        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
-//        Connection connection = sqldatabase.getConnection();
-//        DataModifier dataModifier = new DataModifier(connection);
-//        dataModifier.addItem(name, cat, brand, price);
-//        
-        //Delete
-        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
-        Connection connection = sqldatabase.getConnection();
-        DataModifier dataModifier = new DataModifier(connection);
-        dataModifier.deleteItem(name);
-
-        //UPDATE
-//        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
-//        Connection connection = sqldatabase.getConnection();
-//        DataModifier dataModifier = new DataModifier(connection);
-//        dataModifier.updateItem("name2", "cat", "brand", "120");
+        dataModifier.addItem(name, cat, brand, price);
+    
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,16 +103,16 @@ public class Dashboard extends javax.swing.JFrame {
         addRow = new javax.swing.JButton();
         updateRow = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         priceText = new javax.swing.JTextField();
         nameText = new javax.swing.JTextField();
         catText = new javax.swing.JTextField();
         brandText = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
         jInternalFrame3 = new javax.swing.JInternalFrame();
         jPanel13 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -413,9 +405,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel29.setText("Item Price  :");
         jPanel11.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
-        jLabel30.setText("Item Name : ");
-        jPanel11.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
-
         jLabel31.setText("Category    : ");
         jPanel11.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
@@ -432,9 +421,10 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel11.add(catText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 270, -1));
         jPanel11.add(brandText, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 270, -1));
 
-        jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
-        jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 640, 180));
+        jLabel33.setText("Item Name : ");
+        jPanel11.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
+        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -443,6 +433,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.setGridColor(new java.awt.Color(204, 204, 255));
         jTable1.setSelectionBackground(new java.awt.Color(102, 102, 255));
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -453,6 +444,9 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel11.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 640, 170));
+
+        jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 640, 200));
 
         jInternalFrame2.getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 13, 720, 460));
 
@@ -674,6 +668,9 @@ public class Dashboard extends javax.swing.JFrame {
         dm.setValueAt(brandText.getText(), jTable1.getSelectedRow(),2);
         dm.setValueAt(priceText.getText(), jTable1.getSelectedRow(),3);
         
+        //UPDATE
+        dataModifier.updateItem(nameText.getText(), catText.getText(), brandText.getText(), priceText.getText());        
+        
         //CLEAR TEXT
         nameText.setText(""); 
         catText.setText("");
@@ -690,7 +687,9 @@ public class Dashboard extends javax.swing.JFrame {
     
     //REMOVE
     private void removeRowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRowMouseClicked
-
+        
+        //Delete
+        dataModifier.deleteItem(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
         dm.removeRow(jTable1.getSelectedRow());
     }//GEN-LAST:event_removeRowMouseClicked
 
@@ -740,9 +739,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

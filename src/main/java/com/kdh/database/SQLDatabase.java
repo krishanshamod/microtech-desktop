@@ -19,9 +19,11 @@ public class SQLDatabase {
 
 
     public SQLDatabase(String url, String username, String password) {
-        this.url = url;
         this.username = username;
-        this.password = password;
+//        this.url = url;
+//        this.password = password;
+        this.url = "jdbc:mysql://localhost/microtech";
+        this.password = "";
     }
 
     public Connection getConnection() {
