@@ -5,10 +5,13 @@
 package com.kdh.UI;
 
 import com.kdh.database.DataModifier;
+import com.kdh.database.DataRetriever;
 import com.kdh.database.DataValidator;
 import com.kdh.database.SQLDatabase;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -21,16 +24,19 @@ public class Dashboard extends javax.swing.JFrame {
     SQLDatabase sqldatabase;
     DataModifier dataModifier;
     Connection connection;
-    
+    DataRetriever dataRetriever;
     /**
      * Creates new form Dashboard
      */
-    public Dashboard() {
+    public Dashboard() throws SQLException {
         initComponents(); 
-        CreateTableColumns();
         this.sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
         this.connection = sqldatabase.getConnection();
         this.dataModifier = new DataModifier(connection);
+        this.dataRetriever = new DataRetriever(connection);
+        
+        CreateTableColumns();
+        AddTableData();
     }
     
     private void CreateTableColumns () {
@@ -43,6 +49,17 @@ public class Dashboard extends javax.swing.JFrame {
         dm.addColumn("Item Price");
     }
     
+    private void AddTableData() throws SQLException{
+        ResultSet results = dataRetriever.retrieveDataFromItemsTable();
+        while (results.next()) {
+            String name = results.getString("item_name");
+            String cat = results.getString("category");
+            String brand = results.getString("brand");
+            String price = results.getString("item_price");
+            
+            dm.addRow(new Object[]{name, cat, brand, price});
+        }
+    }
     //Add row data
     private void Populate(String name, String cat, String brand, String price){
         
