@@ -4,7 +4,11 @@
  */
 package com.kdh.UI;
 
+import com.kdh.database.DataModifier;
+import com.kdh.database.DataValidator;
+import com.kdh.database.SQLDatabase;
 import java.awt.Color;
+import java.sql.Connection;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -38,6 +42,24 @@ public class Dashboard extends javax.swing.JFrame {
         
         String[] rowData = {name,cat,brand,price};
         dm.addRow(rowData);
+        
+        //Add
+//        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
+//        Connection connection = sqldatabase.getConnection();
+//        DataModifier dataModifier = new DataModifier(connection);
+//        dataModifier.addItem(name, cat, brand, price);
+//        
+        //Delete
+        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
+        Connection connection = sqldatabase.getConnection();
+        DataModifier dataModifier = new DataModifier(connection);
+        dataModifier.deleteItem(name);
+
+        //UPDATE
+//        SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
+//        Connection connection = sqldatabase.getConnection();
+//        DataModifier dataModifier = new DataModifier(connection);
+//        dataModifier.updateItem("name2", "cat", "brand", "120");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -668,6 +690,7 @@ public class Dashboard extends javax.swing.JFrame {
     
     //REMOVE
     private void removeRowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRowMouseClicked
+
         dm.removeRow(jTable1.getSelectedRow());
     }//GEN-LAST:event_removeRowMouseClicked
 

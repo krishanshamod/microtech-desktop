@@ -6,10 +6,10 @@ import java.sql.Statement;
 import java.security.MessageDigest;
 import javax.xml.bind.DatatypeConverter;
 
-public class DataRetriever {
+public class DataValidator {
     Connection connection;
 
-    public DataRetriever(Connection connection) {
+    public DataValidator(Connection connection) {
         this.connection = connection;
     }
 

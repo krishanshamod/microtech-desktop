@@ -4,7 +4,7 @@
  */
 package com.kdh.UI;
 
-import com.kdh.database.DataRetriever;
+import com.kdh.database.DataValidator;
 import com.kdh.database.SQLDatabase;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -193,8 +193,8 @@ public class LoginUI extends javax.swing.JFrame {
 
         SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
         Connection connection = sqldatabase.getConnection();
-        DataRetriever dataRetriever = new DataRetriever(connection);
-        boolean hasFoundAMatch = dataRetriever.validateLoginData(userValue , passValue);
+        DataValidator dataValidator = new DataValidator(connection);
+        boolean hasFoundAMatch = dataValidator.validateLoginData(userValue , passValue);
         
         if(hasFoundAMatch) {
             java.awt.EventQueue.invokeLater(new Runnable() {
