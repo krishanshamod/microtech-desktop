@@ -7,6 +7,9 @@ package com.kdh.UI;
 import com.kdh.database.DataValidator;
 import com.kdh.database.SQLDatabase;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -80,7 +83,6 @@ public class LoginUI extends javax.swing.JFrame {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 80, 28));
 
         txtusername.setBackground(new java.awt.Color(102, 102, 255));
-        txtusername.setText("Username");
         txtusername.setBorder(null);
         txtusername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -95,7 +97,6 @@ public class LoginUI extends javax.swing.JFrame {
         jPanel2.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 154, 30));
 
         pwd.setBackground(new java.awt.Color(102, 102, 255));
-        pwd.setText("jPasswordField1");
         pwd.setBorder(null);
         pwd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -199,7 +200,11 @@ public class LoginUI extends javax.swing.JFrame {
         if(hasFoundAMatch) {
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                try {
+                    new Dashboard().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 setVisible(false); 
                 dispose(); 
             }

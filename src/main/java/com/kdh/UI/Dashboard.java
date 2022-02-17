@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -354,6 +356,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 290, 90));
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closing.png"))); // NOI18N
+        jLabel24.setToolTipText("LogOut");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -567,7 +570,13 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel3MouseExited
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        System.exit(0);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new LoginUI().setVisible(true);
+            setVisible(false); 
+            dispose(); 
+        }
+    });
     }//GEN-LAST:event_jLabel24MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
