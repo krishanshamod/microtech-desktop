@@ -75,14 +75,25 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     private void AddTableData() throws SQLException{
-        ResultSet results = dataRetriever.retrieveDataFromItemsTable();
-        while (results.next()) {
-            String name = results.getString("item_name");
-            String cat = results.getString("category");
-            String brand = results.getString("brand");
-            String price = results.getString("item_price");
+        ResultSet itemResults = dataRetriever.retrieveDataFromItemsTable();
+        while (itemResults.next()) {
+            String name = itemResults.getString("item_name");
+            String cat = itemResults.getString("category");
+            String brand = itemResults.getString("brand");
+            String price = itemResults.getString("item_price");
             
             itemsTable.addRow(new Object[]{name, cat, brand, price});
+        }
+        
+        ResultSet usersResults = dataRetriever.retrieveDataFromUsersTable();
+        while (usersResults.next()) {
+            String email = usersResults.getString("email");
+            String name = usersResults.getString("f_name").concat(" ").concat(usersResults.getString("l_name"));
+            String phone = usersResults.getString("phone_no");
+            String address = usersResults.getString("addr_line1").concat(", ").concat(usersResults.getString("addr_line2")).concat(", ").concat(usersResults.getString("city")).concat(", ").concat(usersResults.getString("country"));
+            String status = usersResults.getString("status");
+            
+            userTable.addRow(new Object[]{email, name, phone, address, status});
         }
     }
     //Add row data
@@ -491,7 +502,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         ));
         jTable1.setGridColor(new java.awt.Color(204, 204, 255));
-        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        jTable1.setSelectionBackground(new java.awt.Color(102, 102, 255));
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -530,7 +541,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         ));
         jTable2.setGridColor(new java.awt.Color(204, 204, 255));
-        jTable2.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        jTable2.setSelectionBackground(new java.awt.Color(102, 102, 255));
         jScrollPane2.setViewportView(jTable2);
 
         jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 680, 190));
@@ -668,7 +679,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         ));
         jTable3.setGridColor(new java.awt.Color(204, 204, 255));
-        jTable3.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        jTable3.setSelectionBackground(new java.awt.Color(102, 102, 255));
         jScrollPane3.setViewportView(jTable3);
 
         jPanel12.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 680, 370));
@@ -917,7 +928,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_removeRow3ActionPerformed
 
     private void removeRow4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow4MouseClicked
-        // TODO add your handling code here:
+        //Delete
+        dataModifier.deleteUser(jTable3.getValueAt(jTable3.getSelectedRow(),0).toString());
+        userTable.removeRow(jTable3.getSelectedRow());
     }//GEN-LAST:event_removeRow4MouseClicked
 
     private void removeRow4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow4ActionPerformed

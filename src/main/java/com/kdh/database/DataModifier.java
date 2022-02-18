@@ -76,6 +76,21 @@ public class DataModifier {
             System.out.println("Error connecting with database: " + e.getMessage());
         }
     }
+    
+    //Remove user from database
+    public void deleteUser(String email) {
+        System.out.println("Accessing Database");
+
+        try {
+
+            Statement updateStatement = connection.createStatement();
+            updateStatement.executeUpdate("DELETE FROM users WHERE email = '" +email+"'");
+            updateStatement.executeUpdate("DELETE FROM address WHERE usermail = '" +email+"'");
+            
+        } catch (Exception e) {
+            System.out.println("Error connecting with database: " + e.getMessage());
+        }
+    }
 
 
     

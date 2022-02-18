@@ -32,6 +32,19 @@ public class DataRetriever {
         }
         return null;
     } 
+    
+    public ResultSet retrieveDataFromUsersTable() {
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * from users INNER JOIN address ON users.email = address.usermail");
+            return results;   
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        return null;
+    } 
 }
 
 
