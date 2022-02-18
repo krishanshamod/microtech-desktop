@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Dashboard extends javax.swing.JFrame {
     
-    DefaultTableModel dm;
+    DefaultTableModel itemsTable;
+    DefaultTableModel ordersTable;
     SQLDatabase sqldatabase;
     DataModifier dataModifier;
     Connection connection;
@@ -42,13 +43,26 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     private void CreateTableColumns () {
-        dm= (DefaultTableModel)jTable1.getModel();
+        itemsTable = (DefaultTableModel)jTable1.getModel();
+        ordersTable = (DefaultTableModel)jTable2.getModel();
         
         //Add Cols
-        dm.addColumn("Item Name");
-        dm.addColumn("Category");
-        dm.addColumn("Brand");
-        dm.addColumn("Item Price");
+        itemsTable.addColumn("Item Name");
+        itemsTable.addColumn("Category");
+        itemsTable.addColumn("Brand");
+        itemsTable.addColumn("Item Price");
+        
+        ordersTable.addColumn("Order ID");
+        ordersTable.addColumn("Item Name");
+        ordersTable.addColumn("No of Items");
+        ordersTable.addColumn("User Name");
+        ordersTable.addColumn("User Address");
+        ordersTable.addColumn("User Phone");
+        ordersTable.addColumn("Status");
+                
+        jTable1.getTableHeader().setBackground(Color.decode("#cecef0"));
+        jTable2.getTableHeader().setBackground(Color.decode("#cecef0"));
+
     }
     
     private void AddTableData() throws SQLException{
@@ -59,14 +73,14 @@ public class Dashboard extends javax.swing.JFrame {
             String brand = results.getString("brand");
             String price = results.getString("item_price");
             
-            dm.addRow(new Object[]{name, cat, brand, price});
+            itemsTable.addRow(new Object[]{name, cat, brand, price});
         }
     }
     //Add row data
     private void Populate(String name, String cat, String brand, String price){
         
         String[] rowData = {name,cat,brand,price};
-        dm.addRow(rowData);
+        itemsTable.addRow(rowData);
         
         //Add
         dataModifier.addItem(name, cat, brand, price);
@@ -134,6 +148,25 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jInternalFrame3 = new javax.swing.JInternalFrame();
         jPanel13 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        removeRow1 = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        removeRow2 = new javax.swing.JButton();
+        removeRow3 = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jInternalFrame4 = new javax.swing.JInternalFrame();
         jPanel12 = new javax.swing.JPanel();
@@ -271,7 +304,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel12.setText("Search");
+        jLabel12.setText("Users");
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 180, 50));
@@ -385,7 +418,7 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
 
         jInternalFrame2.setBorder(null);
-        jInternalFrame2.setVisible(true);
+        jInternalFrame2.setVisible(false);
         jInternalFrame2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -475,15 +508,125 @@ public class Dashboard extends javax.swing.JFrame {
         jInternalFrame2.getAccessibleContext().setAccessibleDescription("0");
 
         jInternalFrame3.setBorder(null);
-        jInternalFrame3.setVisible(false);
+        jInternalFrame3.setVisible(true);
         jInternalFrame3.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel26.setBackground(new java.awt.Color(0, 0, 51));
-        jLabel26.setText("Orders");
-        jPanel13.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 60, 30));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable2.setGridColor(new java.awt.Color(204, 204, 255));
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 680, 190));
+
+        jLabel34.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel34.setText("dsfsdfgfdggdfgdfgdfgfgdf");
+        jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+
+        jLabel35.setText("User Name     : ");
+        jPanel13.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+
+        jLabel36.setText("User Address : ");
+        jPanel13.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+
+        removeRow1.setBackground(new java.awt.Color(204, 204, 255));
+        removeRow1.setText("Delivered");
+        removeRow1.setToolTipText("");
+        removeRow1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeRow1MouseClicked(evt);
+            }
+        });
+        removeRow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeRow1ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(removeRow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 140, 40));
+
+        jLabel30.setText("User Phone    :");
+        jPanel13.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        jLabel37.setText("Item Name     : ");
+        jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+
+        jLabel38.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel38.setText("4");
+        jPanel13.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
+
+        jLabel39.setText("Order ID :");
+        jPanel13.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
+
+        jLabel40.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel40.setText("dsfsdfgfdggdfgdfgdfgfgdf");
+        jPanel13.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+
+        jLabel41.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel41.setText("dsfsdfgfdggdfgdfgdfgfgdf");
+        jPanel13.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
+
+        jLabel42.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel42.setText("dsfsdfgfdggdfgdfgdfgfgdf");
+        jPanel13.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+
+        jLabel43.setText("No of Items : ");
+        jPanel13.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+
+        jLabel44.setText("Status : ");
+        jPanel13.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, -1));
+
+        jLabel45.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel45.setText("Pending");
+        jPanel13.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
+
+        removeRow2.setBackground(new java.awt.Color(204, 204, 255));
+        removeRow2.setToolTipText("");
+        removeRow2.setLabel("Cancel");
+        removeRow2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeRow2MouseClicked(evt);
+            }
+        });
+        removeRow2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeRow2ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(removeRow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 140, 40));
+
+        removeRow3.setBackground(new java.awt.Color(204, 204, 255));
+        removeRow3.setText("Pending");
+        removeRow3.setToolTipText("");
+        removeRow3.setActionCommand("Pending");
+        removeRow3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeRow3MouseClicked(evt);
+            }
+        });
+        removeRow3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeRow3ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(removeRow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 140, 40));
+
+        jLabel46.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel46.setText("4");
+        jPanel13.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
+
+        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        jPanel13.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 680, 200));
 
         jInternalFrame3.getContentPane().add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 730, 460));
 
@@ -498,7 +641,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 51));
         jLabel25.setText("Search");
-        jPanel12.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 60, 30));
+        jPanel12.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 50, 30));
 
         jInternalFrame4.getContentPane().add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 730, 460));
 
@@ -689,10 +832,10 @@ public class Dashboard extends javax.swing.JFrame {
     
     //UPDATE
     private void updateRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRowActionPerformed
-        dm.setValueAt(nameText.getText(), jTable1.getSelectedRow(),0);
-        dm.setValueAt(catText.getText(), jTable1.getSelectedRow(),1);
-        dm.setValueAt(brandText.getText(), jTable1.getSelectedRow(),2);
-        dm.setValueAt(priceText.getText(), jTable1.getSelectedRow(),3);
+        itemsTable.setValueAt(nameText.getText(), jTable1.getSelectedRow(),0);
+        itemsTable.setValueAt(catText.getText(), jTable1.getSelectedRow(),1);
+        itemsTable.setValueAt(brandText.getText(), jTable1.getSelectedRow(),2);
+        itemsTable.setValueAt(priceText.getText(), jTable1.getSelectedRow(),3);
         
         //UPDATE
         dataModifier.updateItem(nameText.getText(), catText.getText(), brandText.getText(), priceText.getText());        
@@ -716,8 +859,32 @@ public class Dashboard extends javax.swing.JFrame {
         
         //Delete
         dataModifier.deleteItem(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
-        dm.removeRow(jTable1.getSelectedRow());
+        itemsTable.removeRow(jTable1.getSelectedRow());
     }//GEN-LAST:event_removeRowMouseClicked
+
+    private void removeRow1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow1MouseClicked
+
+    private void removeRow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow1ActionPerformed
+
+    private void removeRow2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow2MouseClicked
+
+    private void removeRow2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow2ActionPerformed
+
+    private void removeRow3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow3MouseClicked
+
+    private void removeRow3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow3ActionPerformed
 
   
     public void bar(JLabel lab) {
@@ -765,10 +932,24 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -790,10 +971,15 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField nameText;
     private javax.swing.JTextField priceText;
     private javax.swing.JButton removeRow;
+    private javax.swing.JButton removeRow1;
+    private javax.swing.JButton removeRow2;
+    private javax.swing.JButton removeRow3;
     private javax.swing.JButton updateRow;
     // End of variables declaration//GEN-END:variables
 }
