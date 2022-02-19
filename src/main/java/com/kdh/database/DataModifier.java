@@ -126,4 +126,20 @@ public class DataModifier {
             System.out.println("Error connecting with database: " + e.getMessage());
         }
     }
+    
+    //Update order status
+    public void updateOrderStatus(String order_id, String status) {
+        System.out.println("Accessing Database");
+
+        try {
+
+            Statement updateStatement = connection.createStatement();
+            updateStatement.executeUpdate("UPDATE orders\n" +
+                                          "SET orders.status = '" + status + "'\n" +
+                                          "WHERE orders.order_id = '" + order_id + "'");
+            
+        } catch (Exception e) {
+            System.out.println("Error connecting with database: " + e.getMessage());
+        }
+    }
 }
