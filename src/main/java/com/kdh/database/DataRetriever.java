@@ -7,6 +7,8 @@ package com.kdh.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -76,6 +78,76 @@ public class DataRetriever {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
         return null;
+    }
+        
+    public Integer retrieveNumberOfNewOrders() {
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String todayDate = dtf.format(now);
+        int count = 0;
+
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE order_time BETWEEN '"+ todayDate + " 00:00:00' AND '" + todayDate +  " 23:59:59'");
+            
+            while (results.next()){
+                count++;
+            }  
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        
+        return count;
+    }
+    
+    public Integer retrieveDailyRevenue() {
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String todayDate = dtf.format(now);
+        int revenue = 0;
+
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE order_time BETWEEN '"+ todayDate + " 00:00:00' AND '" + todayDate +  " 23:59:59'");
+            
+            while (results.next()){
+                int price = results.getInt("price");
+                revenue += price;
+            }  
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        
+        return revenue;
+    }
+    
+    public Integer retrieveNumberOfNewUsers() {
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String todayDate = dtf.format(now);
+        int users = 0;
+
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * FROM users WHERE email_verified_at BETWEEN '"+ todayDate + " 00:00:00' AND '" + todayDate +  " 23:59:59'");
+            
+            while (results.next()){
+                users++;
+            }  
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        
+        return users;
     }
     
 }
