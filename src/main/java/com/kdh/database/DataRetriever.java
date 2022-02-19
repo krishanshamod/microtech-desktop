@@ -45,17 +45,17 @@ public class DataRetriever {
         }
         return null;
     } 
+    
+    public ResultSet retrieveDataFromAdminsTable() {
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * from admins");
+            return results;   
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        return null;
+    }
 }
-
-
-//            SQLDatabase sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
-//            Connection connection = sqldatabase.getConnection();
-//            DataRetriever dataRetriever = new DataRetriever(connection);
-//            ResultSet results = dataRetriever.retrieveDataFromItemsTable();
-//            while (results.next()) {
-//                String name = results.getString("item_name");
-//                String cat = results.getString("category");
-//                String brand = results.getString("brand");
-//                String price = results.getString("item_price");
-//                System.out.println(name+ cat + brand + price);             
-//            }

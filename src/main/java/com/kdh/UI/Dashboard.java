@@ -25,6 +25,7 @@ public class Dashboard extends javax.swing.JFrame {
     DefaultTableModel itemsTable;
     DefaultTableModel ordersTable;
     DefaultTableModel userTable;
+    DefaultTableModel adminTable;
     SQLDatabase sqldatabase;
     DataModifier dataModifier;
     Connection connection;
@@ -47,7 +48,8 @@ public class Dashboard extends javax.swing.JFrame {
         itemsTable = (DefaultTableModel)jTable1.getModel();
         ordersTable = (DefaultTableModel)jTable2.getModel();
         userTable = (DefaultTableModel)jTable3.getModel();
-        
+        adminTable = (DefaultTableModel)jTable4.getModel();
+                
         //Add Cols
         itemsTable.addColumn("Item Name");
         itemsTable.addColumn("Category");
@@ -67,11 +69,15 @@ public class Dashboard extends javax.swing.JFrame {
         userTable.addColumn("Phone");
         userTable.addColumn("Address");
         userTable.addColumn("Verified");
-                
+        
+        adminTable.addColumn("Admin Email");
+        adminTable.addColumn("First Name");
+        adminTable.addColumn("Last Name");
+
         jTable1.getTableHeader().setBackground(Color.decode("#cecef0"));
         jTable2.getTableHeader().setBackground(Color.decode("#cecef0"));
         jTable3.getTableHeader().setBackground(Color.decode("#cecef0"));
-        
+        jTable4.getTableHeader().setBackground(Color.decode("#cecef0"));
     }
     
     private void AddTableData() throws SQLException{
@@ -95,6 +101,14 @@ public class Dashboard extends javax.swing.JFrame {
             
             userTable.addRow(new Object[]{email, name, phone, address, status});
         }
+        
+        ResultSet adminResults = dataRetriever.retrieveDataFromAdminsTable();
+        while (adminResults.next()) {
+            String email = adminResults.getString("email");
+            String fname = adminResults.getString("f_name");
+            String lname = adminResults.getString("l_name");
+            adminTable.addRow(new Object[]{email, fname, lname});
+        }
     }
     //Add row data
     private void Populate(String name, String cat, String brand, String price){
@@ -105,6 +119,16 @@ public class Dashboard extends javax.swing.JFrame {
         //Add
         dataModifier.addItem(name, cat, brand, price);
     
+    }
+    
+    
+    private void AdminPopulate(String fname, String lname, String email, String pass){
+        
+        String[] rowData = {email,fname,lname};
+        adminTable.addRow(rowData);
+        
+        //Add
+        dataModifier.addAdmin(fname,lname, email, pass);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,7 +218,19 @@ public class Dashboard extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jInternalFrame5 = new javax.swing.JInternalFrame();
         jPanel14 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        adminNameText1 = new javax.swing.JTextField();
+        addRow1 = new javax.swing.JButton();
+        adminEmailText = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        adminPassText = new javax.swing.JTextField();
+        removeRow5 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel50 = new javax.swing.JLabel();
+        adminNameText = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
         jInternalFrame6 = new javax.swing.JInternalFrame();
         jPanel15 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -624,7 +660,6 @@ public class Dashboard extends javax.swing.JFrame {
         removeRow3.setBackground(new java.awt.Color(204, 204, 255));
         removeRow3.setText("Pending");
         removeRow3.setToolTipText("");
-        removeRow3.setActionCommand("Pending");
         removeRow3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 removeRow3MouseClicked(evt);
@@ -649,7 +684,7 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(jInternalFrame3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
 
         jInternalFrame4.setBorder(null);
-        jInternalFrame4.setVisible(true);
+        jInternalFrame4.setVisible(false);
         jInternalFrame4.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
@@ -689,15 +724,85 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(jInternalFrame4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
 
         jInternalFrame5.setBorder(null);
-        jInternalFrame5.setVisible(false);
+        jInternalFrame5.setVisible(true);
         jInternalFrame5.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel27.setBackground(new java.awt.Color(0, 0, 51));
-        jLabel27.setText("Statistics");
-        jPanel14.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 60, 30));
+        jLabel47.setText("Last Name    : ");
+        jPanel14.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        jPanel14.add(adminNameText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 270, -1));
+
+        addRow1.setText("Add");
+        addRow1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addRow1MouseClicked(evt);
+            }
+        });
+        addRow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRow1ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(addRow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 140, 40));
+
+        adminEmailText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminEmailTextActionPerformed(evt);
+            }
+        });
+        jPanel14.add(adminEmailText, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 270, -1));
+
+        jLabel48.setText("Admin Email :");
+        jPanel14.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+
+        jLabel49.setText("Password      : ");
+        jPanel14.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        jPanel14.add(adminPassText, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 270, -1));
+
+        removeRow5.setBackground(new java.awt.Color(204, 204, 255));
+        removeRow5.setText("Remove");
+        removeRow5.setToolTipText("");
+        removeRow5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeRow5MouseClicked(evt);
+            }
+        });
+        removeRow5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeRow5ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(removeRow5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 140, 40));
+
+        jTable4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTable4.setGridColor(new java.awt.Color(204, 204, 255));
+        jTable4.setSelectionBackground(new java.awt.Color(102, 102, 255));
+        jTable4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+
+        jPanel14.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 640, 170));
+
+        jLabel50.setText("First Name    : ");
+        jPanel14.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jPanel14.add(adminNameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 270, -1));
+
+        jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
+        jPanel14.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 640, 200));
 
         jInternalFrame5.getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 730, 460));
 
@@ -937,6 +1042,40 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_removeRow4ActionPerformed
 
+    private void addRow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRow1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addRow1ActionPerformed
+
+    private void adminEmailTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminEmailTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminEmailTextActionPerformed
+
+    private void removeRow5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow5MouseClicked
+        dataModifier.deleteAdmin(jTable4.getValueAt(jTable4.getSelectedRow(),0).toString());
+        adminTable.removeRow(jTable4.getSelectedRow());
+    }//GEN-LAST:event_removeRow5MouseClicked
+
+    private void removeRow5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeRow5ActionPerformed
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        adminEmailText.setText(jTable4.getValueAt(jTable4.getSelectedRow(),0).toString()); 
+        adminNameText.setText(jTable4.getValueAt(jTable4.getSelectedRow(),1).toString());
+        adminNameText1.setText(jTable4.getValueAt(jTable4.getSelectedRow(),2).toString());
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void addRow1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRow1MouseClicked
+        AdminPopulate(adminNameText.getText(), adminNameText1.getText(), adminEmailText.getText(), adminPassText.getText());
+        
+        //CLEAR TEXT
+        adminNameText1.setText(""); 
+        adminNameText.setText(""); 
+        adminEmailText.setText("");
+        adminPassText.setText("");
+
+    }//GEN-LAST:event_addRow1MouseClicked
+
   
     public void bar(JLabel lab) {
         jLabel2.setOpaque(false);
@@ -951,6 +1090,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRow;
+    private javax.swing.JButton addRow1;
+    private javax.swing.JTextField adminEmailText;
+    private javax.swing.JTextField adminNameText;
+    private javax.swing.JTextField adminNameText1;
+    private javax.swing.JTextField adminPassText;
     private javax.swing.JTextField brandText;
     private javax.swing.JTextField catText;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -976,8 +1120,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -999,7 +1143,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1022,9 +1170,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField nameText;
     private javax.swing.JTextField priceText;
     private javax.swing.JButton removeRow;
@@ -1032,6 +1182,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton removeRow2;
     private javax.swing.JButton removeRow3;
     private javax.swing.JButton removeRow4;
+    private javax.swing.JButton removeRow5;
     private javax.swing.JButton updateRow;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,9 +4,11 @@
  */
 package com.kdh.database;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -91,7 +93,37 @@ public class DataModifier {
             System.out.println("Error connecting with database: " + e.getMessage());
         }
     }
-
-
     
+    //Add item to database
+    public void addAdmin(String fname, String lname, String email, String pass) {
+        System.out.println("Accessing Database");
+
+        try {
+            
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(pass.getBytes());
+            byte[] digest = md.digest();
+            String Hashedpwd = DatatypeConverter.printHexBinary(digest).toUpperCase();
+            
+            Statement updateStatement = connection.createStatement();
+            updateStatement.executeUpdate("INSERT INTO admins(email, passwd, f_name, l_name) VALUES ('"+email+"', '"+Hashedpwd+"','"+fname+"','"+lname+"')");
+            
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+    }
+
+    //Remove admin from database
+    public void deleteAdmin(String email) {
+        System.out.println("Accessing Database");
+
+        try {
+
+            Statement updateStatement = connection.createStatement();
+            updateStatement.executeUpdate("DELETE FROM admins WHERE email = '" +email+"'");
+            
+        } catch (Exception e) {
+            System.out.println("Error connecting with database: " + e.getMessage());
+        }
+    }
 }
