@@ -68,7 +68,8 @@ public class DataRetriever {
                                                         "INNER JOIN users ON orders.user_email = users.email\n" +
                                                         "INNER JOIN address ON orders.user_email = address.usermail\n" +
                                                         "INNER JOIN orderdetails ON orders.order_id = orderdetails.order_id\n" +
-                                                        "INNER JOIN items ON orderdetails.item_id = items.item_id;");
+                                                        "INNER JOIN items ON orderdetails.item_id = items.item_id ORDER BY orders.order_id DESC;");
+            
             return results;   
           
         } catch (Exception e) {

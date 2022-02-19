@@ -11,6 +11,7 @@ import com.kdh.database.SQLDatabase;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,6 +110,20 @@ public class Dashboard extends javax.swing.JFrame {
             String lname = adminResults.getString("l_name");
             adminTable.addRow(new Object[]{email, fname, lname});
         }
+        
+        ResultSet ordersResults = dataRetriever.retrieveOrderData();
+        while(ordersResults.next()) {
+            String id = ordersResults.getString("order_id");
+            String itemname = ordersResults.getString("item_name");
+            String noofitems = ordersResults.getString("no_of_items");
+            String name = ordersResults.getString("f_name").concat(" ").concat(ordersResults.getString("l_name"));
+            String address = ordersResults.getString("addr_line1").concat(", ").concat(ordersResults.getString("addr_line2")).concat(", ").concat(ordersResults.getString("city")).concat(", ").concat(ordersResults.getString("country"));
+            String phone = ordersResults.getString("phone_no");
+            String status = ordersResults.getString("status");
+            
+            ordersTable.addRow(new Object[]{id, itemname, noofitems, name, address, phone, status });
+            
+        }
     }
     //Add row data
     private void Populate(String name, String cat, String brand, String price){
@@ -196,7 +211,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        removeRow1 = new javax.swing.JButton();
+        delivered = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -207,8 +222,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        removeRow2 = new javax.swing.JButton();
-        removeRow3 = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        pending = new javax.swing.JButton();
         jLabel46 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jInternalFrame4 = new javax.swing.JInternalFrame();
@@ -559,7 +574,7 @@ public class Dashboard extends javax.swing.JFrame {
         jInternalFrame2.getAccessibleContext().setAccessibleDescription("0");
 
         jInternalFrame3.setBorder(null);
-        jInternalFrame3.setVisible(false);
+        jInternalFrame3.setVisible(true);
         jInternalFrame3.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -567,10 +582,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
@@ -578,12 +590,16 @@ public class Dashboard extends javax.swing.JFrame {
         ));
         jTable2.setGridColor(new java.awt.Color(204, 204, 255));
         jTable2.setSelectionBackground(new java.awt.Color(102, 102, 255));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 680, 190));
 
         jLabel34.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel34.setText("dsfsdfgfdggdfgdfgdfgfgdf");
         jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
         jLabel35.setText("User Name     : ");
@@ -592,20 +608,20 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel36.setText("User Address : ");
         jPanel13.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
-        removeRow1.setBackground(new java.awt.Color(204, 204, 255));
-        removeRow1.setText("Delivered");
-        removeRow1.setToolTipText("");
-        removeRow1.addMouseListener(new java.awt.event.MouseAdapter() {
+        delivered.setBackground(new java.awt.Color(204, 204, 255));
+        delivered.setText("Delivered");
+        delivered.setToolTipText("");
+        delivered.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                removeRow1MouseClicked(evt);
+                deliveredMouseClicked(evt);
             }
         });
-        removeRow1.addActionListener(new java.awt.event.ActionListener() {
+        delivered.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeRow1ActionPerformed(evt);
+                deliveredActionPerformed(evt);
             }
         });
-        jPanel13.add(removeRow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 140, 40));
+        jPanel13.add(delivered, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 140, 40));
 
         jLabel30.setText("User Phone    :");
         jPanel13.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
@@ -614,22 +630,18 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
         jLabel38.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel38.setText("4");
         jPanel13.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
         jLabel39.setText("Order ID :");
         jPanel13.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
 
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel40.setText("dsfsdfgfdggdfgdfgdfgfgdf");
         jPanel13.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
 
         jLabel41.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel41.setText("dsfsdfgfdggdfgdfgdfgfgdf");
         jPanel13.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
 
         jLabel42.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel42.setText("dsfsdfgfdggdfgdfgdfgfgdf");
         jPanel13.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
         jLabel43.setText("No of Items : ");
@@ -639,41 +651,39 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel13.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, -1));
 
         jLabel45.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel45.setText("Pending");
         jPanel13.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
-        removeRow2.setBackground(new java.awt.Color(204, 204, 255));
-        removeRow2.setToolTipText("");
-        removeRow2.setLabel("Cancel");
-        removeRow2.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancel.setBackground(new java.awt.Color(204, 204, 255));
+        cancel.setToolTipText("");
+        cancel.setLabel("Cancel");
+        cancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                removeRow2MouseClicked(evt);
+                cancelMouseClicked(evt);
             }
         });
-        removeRow2.addActionListener(new java.awt.event.ActionListener() {
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeRow2ActionPerformed(evt);
+                cancelActionPerformed(evt);
             }
         });
-        jPanel13.add(removeRow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 140, 40));
+        jPanel13.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 140, 40));
 
-        removeRow3.setBackground(new java.awt.Color(204, 204, 255));
-        removeRow3.setText("Pending");
-        removeRow3.setToolTipText("");
-        removeRow3.addMouseListener(new java.awt.event.MouseAdapter() {
+        pending.setBackground(new java.awt.Color(204, 204, 255));
+        pending.setText("Pending");
+        pending.setToolTipText("");
+        pending.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                removeRow3MouseClicked(evt);
+                pendingMouseClicked(evt);
             }
         });
-        removeRow3.addActionListener(new java.awt.event.ActionListener() {
+        pending.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeRow3ActionPerformed(evt);
+                pendingActionPerformed(evt);
             }
         });
-        jPanel13.add(removeRow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 140, 40));
+        jPanel13.add(pending, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 140, 40));
 
         jLabel46.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel46.setText("4");
         jPanel13.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
 
         jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255)));
@@ -724,7 +734,7 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(jInternalFrame4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
 
         jInternalFrame5.setBorder(null);
-        jInternalFrame5.setVisible(true);
+        jInternalFrame5.setVisible(false);
         jInternalFrame5.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
@@ -1008,29 +1018,40 @@ public class Dashboard extends javax.swing.JFrame {
         itemsTable.removeRow(jTable1.getSelectedRow());
     }//GEN-LAST:event_removeRowMouseClicked
 
-    private void removeRow1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeRow1MouseClicked
+    private void deliveredMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deliveredMouseClicked
 
-    private void removeRow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeRow1ActionPerformed
+        dataModifier.updateOrderStatus(jTable2.getValueAt(jTable2.getSelectedRow(),0).toString(), "delivered");
+        ordersTable.setValueAt("delivered", jTable2.getSelectedRow(),6);
+        jLabel45.setText("delivered");
+        jLabel45.setForeground (Color.green);
+        
+    }//GEN-LAST:event_deliveredMouseClicked
 
-    private void removeRow2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow2MouseClicked
+    private void deliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveredActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_removeRow2MouseClicked
+    }//GEN-LAST:event_deliveredActionPerformed
 
-    private void removeRow2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeRow2ActionPerformed
+    private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
+        dataModifier.updateOrderStatus(jTable2.getValueAt(jTable2.getSelectedRow(),0).toString(), "cancelled");
+        ordersTable.setValueAt("cancelled", jTable2.getSelectedRow(),6);
+        jLabel45.setText("cancelled");
+        jLabel45.setForeground (Color.gray);
+    }//GEN-LAST:event_cancelMouseClicked
 
-    private void removeRow3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow3MouseClicked
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_removeRow3MouseClicked
+    }//GEN-LAST:event_cancelActionPerformed
 
-    private void removeRow3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRow3ActionPerformed
+    private void pendingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pendingMouseClicked
+        dataModifier.updateOrderStatus(jTable2.getValueAt(jTable2.getSelectedRow(),0).toString(), "pending");
+        ordersTable.setValueAt("pending", jTable2.getSelectedRow(),6);
+        jLabel45.setText("pending");
+        jLabel45.setForeground (Color.red);
+    }//GEN-LAST:event_pendingMouseClicked
+
+    private void pendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_removeRow3ActionPerformed
+    }//GEN-LAST:event_pendingActionPerformed
 
     private void removeRow4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeRow4MouseClicked
         //Delete
@@ -1076,6 +1097,24 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addRow1MouseClicked
 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        jLabel38.setText(jTable2.getValueAt(jTable2.getSelectedRow(),0).toString()); 
+        jLabel40.setText(jTable2.getValueAt(jTable2.getSelectedRow(),1).toString());
+        jLabel46.setText(jTable2.getValueAt(jTable2.getSelectedRow(),2).toString());
+        jLabel41.setText(jTable2.getValueAt(jTable2.getSelectedRow(),3).toString());
+        jLabel42.setText(jTable2.getValueAt(jTable2.getSelectedRow(),4).toString());
+        jLabel34.setText(jTable2.getValueAt(jTable2.getSelectedRow(),5).toString());
+        jLabel45.setText(jTable2.getValueAt(jTable2.getSelectedRow(),6).toString());
+                
+        if(jTable2.getValueAt(jTable2.getSelectedRow(),6).toString().equals("pending")){
+            jLabel45.setForeground (Color.red);
+        }else if(jTable2.getValueAt(jTable2.getSelectedRow(),6).toString().equals("delivered")){
+            jLabel45.setForeground (Color.green);
+        }else{
+            jLabel45.setForeground (Color.gray);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
+
   
     public void bar(JLabel lab) {
         jLabel2.setOpaque(false);
@@ -1096,7 +1135,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField adminNameText1;
     private javax.swing.JTextField adminPassText;
     private javax.swing.JTextField brandText;
+    private javax.swing.JButton cancel;
     private javax.swing.JTextField catText;
+    private javax.swing.JButton delivered;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
@@ -1176,11 +1217,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField nameText;
+    private javax.swing.JButton pending;
     private javax.swing.JTextField priceText;
     private javax.swing.JButton removeRow;
-    private javax.swing.JButton removeRow1;
-    private javax.swing.JButton removeRow2;
-    private javax.swing.JButton removeRow3;
     private javax.swing.JButton removeRow4;
     private javax.swing.JButton removeRow5;
     private javax.swing.JButton updateRow;
