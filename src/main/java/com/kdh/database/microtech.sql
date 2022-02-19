@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 17, 2022 at 03:14 PM
+-- Generation Time: Feb 19, 2022 at 08:16 AM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -41,7 +41,13 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`usermail`, `addr_line1`, `addr_line2`, `city`, `country`, `zip`) VALUES
-('hasinisama99@gmail.com', 'No: 277/C', 'Makewita', 'Ja-Ela', 'Sri Lanka', 11350);
+('chandrakumara@gmail.com', 'No:123/A', 'flower road', 'colombo', 'sri lanka', 123),
+('devin@gmail.com', 'No:123/A', 'flower road', 'colombo', 'sri lanka', 123),
+('hasinisama99@gmail.com', 'No: 123/A', 'Flower Road', 'Colombo', 'Sri Lanka', 123),
+('kajanthan@gmail.com', 'No:123/A', 'flower road', 'colombo', 'sri lanka', 123),
+('krishan@gmail.com', 'No:123/A', 'flower road', 'colombo', 'sri lanka', 123),
+('meg@gmail.com', 'No:123/A', 'flower road', 'colombo', 'sri lanka', 123),
+('paul@gmail.com', 'No:123/A', 'flower road', 'colombo', 'sri lanka', 123);
 
 -- --------------------------------------------------------
 
@@ -197,21 +203,22 @@ CREATE TABLE `orders` (
   `order_id` varchar(10) NOT NULL,
   `user_email` varchar(100) NOT NULL,
   `price` int(7) NOT NULL,
-  `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `order_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(10) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_email`, `price`, `order_time`) VALUES
-('1', 'hasinisama99@gmail.com', 174990, '2021-09-29 16:01:49'),
-('2', 'hasinisama99@gmail.com', 52199, '2021-09-29 16:01:57'),
-('3', 'hasinisama99@gmail.com', 74999, '2021-09-29 16:02:03'),
-('4', 'hasinisama99@gmail.com', 14380, '2021-09-29 16:02:18'),
-('5', 'hasinisama99@gmail.com', 275999, '2021-09-29 16:02:31'),
-('6', 'hasinisama99@gmail.com', 255000, '2021-09-29 16:02:36'),
-('7', 'hasinisama99@gmail.com', 174990, '2021-09-29 16:00:16');
+INSERT INTO `orders` (`order_id`, `user_email`, `price`, `order_time`, `status`) VALUES
+('1', 'hasinisama99@gmail.com', 174990, '2021-09-29 16:01:49', 'Pending'),
+('2', 'hasinisama99@gmail.com', 52199, '2022-02-18 16:14:34', 'Pending'),
+('3', 'hasinisama99@gmail.com', 74999, '2022-02-19 08:10:58', 'Pending'),
+('4', 'hasinisama99@gmail.com', 14380, '2022-02-18 16:14:43', 'Pending'),
+('5', 'hasinisama99@gmail.com', 275999, '2021-09-29 16:02:31', 'Pending'),
+('6', 'hasinisama99@gmail.com', 255000, '2022-02-18 16:14:52', 'Pending'),
+('7', 'hasinisama99@gmail.com', 174990, '2022-02-18 16:14:59', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -290,8 +297,9 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `f_name` varchar(30) NOT NULL,
   `l_name` varchar(30) NOT NULL,
+  `phone_no` varchar(20) NOT NULL,
   `password` varchar(40) NOT NULL,
-  `email_verification_link` varchar(255) NOT NULL,
+  `email_verification_link` varchar(255) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -300,8 +308,14 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `f_name`, `l_name`, `password`, `email_verification_link`, `email_verified_at`, `status`) VALUES
-('hasinisama99@gmail.com', 'Hasini', 'Samarathunga', '81dc9bdb52d04dc20036dbd8313ed055', '6008ad9b551eba21f097ba66b63f3bc53631', '2021-09-26 16:58:28', 1);
+INSERT INTO `users` (`email`, `f_name`, `l_name`, `phone_no`, `password`, `email_verification_link`, `email_verified_at`, `status`) VALUES
+('chandrakumara@gmail.com', 'chandrakumara', 'dissanayake', '876543234', '202cb962ac59075b964b07152d234b70', NULL, NULL, 0),
+('devin@gmail.com', 'devin', 'jayawardena', '876543234', '202cb962ac59075b964b07152d234b70', NULL, NULL, 1),
+('hasinisama99@gmail.com', 'Hasini', 'Samarathunga', '1234556777', '202cb962ac59075b964b07152d234b70', '6008ad9b551eba21f097ba66b63f3bc5385', '2022-01-12 22:51:25', 1),
+('kajanthan@gmail.com', 'kajanthan', 'kumar', '876543234', '202cb962ac59075b964b07152d234b70', NULL, NULL, 1),
+('krishan@gmail.com', 'krishan', 'shamod', '876543234', '202cb962ac59075b964b07152d234b70', NULL, NULL, 1),
+('meg@gmail.com', 'meg', 'griffin', '876543234', '202cb962ac59075b964b07152d234b70', NULL, NULL, 0),
+('paul@gmail.com', 'paul', 'smith', '876543234', '202cb962ac59075b964b07152d234b70', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
