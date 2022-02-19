@@ -522,7 +522,7 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jInternalFrame1.setBorder(null);
-        jInternalFrame1.setVisible(false);
+        jInternalFrame1.setVisible(true);
         jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -1098,7 +1098,7 @@ public class Dashboard extends javax.swing.JFrame {
         jDesktopPane1.add(jInternalFrame5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -40, 760, 490));
 
         jInternalFrame6.setBorder(null);
-        jInternalFrame6.setVisible(true);
+        jInternalFrame6.setVisible(false);
         jInternalFrame6.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
