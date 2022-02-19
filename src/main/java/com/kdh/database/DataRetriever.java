@@ -150,6 +150,66 @@ public class DataRetriever {
         return users;
     }
     
+    public Integer retrieveNumberOfDeliveredOrders() {
+        
+        int orders = 0;
+
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE status='Delivered'");
+            
+            while (results.next()){
+                orders++;
+            }  
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        
+        return orders;
+    }
+    
+    public Integer retrieveNumberOfPendingOrders() {
+        
+        int orders = 0;
+
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE status='Pending'");
+            
+            while (results.next()){
+                orders++;
+            }  
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        
+        return orders;
+    }
+    
+    public Integer retrieveNumberOfCancelledOrders() {
+        
+        int orders = 0;
+
+        try {
+            
+            Statement statement1 = connection.createStatement();
+            ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE status='Cancelled'");
+            
+            while (results.next()){
+                orders++;
+            }  
+          
+        } catch (Exception e) {
+            System.out.println("Error Connecting with database: " + e.getMessage());
+        }
+        
+        return orders;
+    }
+    
 }
 
 
