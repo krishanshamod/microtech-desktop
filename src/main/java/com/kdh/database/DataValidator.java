@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+
 public class DataValidator {
     Connection connection;
 
@@ -18,7 +19,6 @@ public class DataValidator {
         boolean hasFoundAMatch = false;
 
         try {
-
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(pwd.getBytes());
             byte[] digest = md.digest();
@@ -37,6 +37,5 @@ public class DataValidator {
         }
         return hasFoundAMatch;
     }
-
 
 }

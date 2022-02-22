@@ -8,16 +8,15 @@ import java.time.format.DateTimeFormatter;
 
 
 public class DataRetriever {
-
     Connection connection;
 
     public DataRetriever(Connection connection) {
         this.connection = connection;
     }
 
+
     public ResultSet retrieveDataFromItemsTable() {
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * from items");
             return results;
@@ -28,9 +27,9 @@ public class DataRetriever {
         return null;
     }
 
+
     public ResultSet retrieveDataFromUsersTable() {
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * from users INNER JOIN address ON users.email = address.usermail");
             return results;
@@ -41,9 +40,9 @@ public class DataRetriever {
         return null;
     }
 
+
     public ResultSet retrieveDataFromAdminsTable() {
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * from admins");
             return results;
@@ -54,17 +53,16 @@ public class DataRetriever {
         return null;
     }
 
+
     public ResultSet retrieveOrderData() {
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT orders.order_id, items.item_name, orderdetails.no_of_items, users.f_name, users.l_name, address.addr_line1, address.addr_line2, address.city, address.country, users.phone_no, orders.status\n" +
-                    "FROM orders\n" +
-                    "INNER JOIN users ON orders.user_email = users.email\n" +
-                    "INNER JOIN address ON orders.user_email = address.usermail\n" +
-                    "INNER JOIN orderdetails ON orders.order_id = orderdetails.order_id\n" +
-                    "INNER JOIN items ON orderdetails.item_id = items.item_id ORDER BY orders.order_id DESC;");
-
+                                                            "FROM orders\n" +
+                                                            "INNER JOIN users ON orders.user_email = users.email\n" +
+                                                            "INNER JOIN address ON orders.user_email = address.usermail\n" +
+                                                            "INNER JOIN orderdetails ON orders.order_id = orderdetails.order_id\n" +
+                                                            "INNER JOIN items ON orderdetails.item_id = items.item_id ORDER BY orders.order_id DESC;");
             return results;
 
         } catch (Exception e) {
@@ -72,6 +70,7 @@ public class DataRetriever {
         }
         return null;
     }
+
 
     public Integer retrieveNumberOfNewOrders() {
 
@@ -81,7 +80,6 @@ public class DataRetriever {
         int count = 0;
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE order_time BETWEEN '" + todayDate + " 00:00:00' AND '" + todayDate + " 23:59:59'");
 
@@ -92,9 +90,9 @@ public class DataRetriever {
         } catch (Exception e) {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
-
         return count;
     }
+
 
     public Integer retrieveDailyRevenue() {
 
@@ -104,7 +102,6 @@ public class DataRetriever {
         int revenue = 0;
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE order_time BETWEEN '" + todayDate + " 00:00:00' AND '" + todayDate + " 23:59:59'");
 
@@ -116,9 +113,9 @@ public class DataRetriever {
         } catch (Exception e) {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
-
         return revenue;
     }
+
 
     public Integer retrieveNumberOfNewUsers() {
 
@@ -128,7 +125,6 @@ public class DataRetriever {
         int users = 0;
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * FROM users WHERE email_verified_at BETWEEN '" + todayDate + " 00:00:00' AND '" + todayDate + " 23:59:59'");
 
@@ -139,16 +135,15 @@ public class DataRetriever {
         } catch (Exception e) {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
-
         return users;
     }
+
 
     public Integer retrieveNumberOfDeliveredOrders() {
 
         int orders = 0;
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE status='Delivered'");
 
@@ -159,16 +154,15 @@ public class DataRetriever {
         } catch (Exception e) {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
-
         return orders;
     }
+
 
     public Integer retrieveNumberOfPendingOrders() {
 
         int orders = 0;
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE status='Pending'");
 
@@ -179,16 +173,15 @@ public class DataRetriever {
         } catch (Exception e) {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
-
         return orders;
     }
+
 
     public Integer retrieveNumberOfCancelledOrders() {
 
         int orders = 0;
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT * FROM orders WHERE status='Cancelled'");
 
@@ -199,7 +192,6 @@ public class DataRetriever {
         } catch (Exception e) {
             System.out.println("Error Connecting with database: " + e.getMessage());
         }
-
         return orders;
     }
 

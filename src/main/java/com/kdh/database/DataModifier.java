@@ -1,4 +1,3 @@
-
 package com.kdh.database;
 
 import javax.xml.bind.DatatypeConverter;
@@ -9,28 +8,29 @@ import java.sql.Statement;
 
 
 public class DataModifier {
-
     Connection connection;
 
     public DataModifier(Connection connection) {
         this.connection = connection;
     }
 
+
     //Add item to database
     public void addItem(String name, String cat, String brand, String price) {
         System.out.println("Accessing Database");
 
         try {
-
             Statement statement1 = connection.createStatement();
             ResultSet results = statement1.executeQuery("SELECT MAX(item_id) from items");
 
             int price_int = Integer.parseInt(price);
             int last_item_id = 0;
             int new_item_id;
+
             while (results.next()) {
                 last_item_id = results.getInt("MAX(item_id)");
             }
+
             new_item_id = last_item_id + 1;
 
             Statement updateStatement = connection.createStatement();
@@ -47,8 +47,6 @@ public class DataModifier {
         System.out.println("Accessing Database");
 
         try {
-
-
             Statement updateStatement = connection.createStatement();
             updateStatement.executeUpdate("DELETE FROM items WHERE item_name = '" + name + "'");
 
@@ -73,12 +71,12 @@ public class DataModifier {
         }
     }
 
+
     //Remove user from database
     public void deleteUser(String email) {
         System.out.println("Accessing Database");
 
         try {
-
             Statement updateStatement = connection.createStatement();
             updateStatement.executeUpdate("DELETE FROM users WHERE email = '" + email + "'");
             updateStatement.executeUpdate("DELETE FROM address WHERE usermail = '" + email + "'");
@@ -88,12 +86,12 @@ public class DataModifier {
         }
     }
 
+
     //Add item to database
     public void addAdmin(String fname, String lname, String email, String pass) {
         System.out.println("Accessing Database");
 
         try {
-
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(pass.getBytes());
             byte[] digest = md.digest();
@@ -107,12 +105,12 @@ public class DataModifier {
         }
     }
 
+
     //Remove admin from database
     public void deleteAdmin(String email) {
         System.out.println("Accessing Database");
 
         try {
-
             Statement updateStatement = connection.createStatement();
             updateStatement.executeUpdate("DELETE FROM admins WHERE email = '" + email + "'");
 
@@ -121,16 +119,16 @@ public class DataModifier {
         }
     }
 
+
     //Update order status
     public void updateOrderStatus(String order_id, String status) {
         System.out.println("Accessing Database");
 
         try {
-
             Statement updateStatement = connection.createStatement();
             updateStatement.executeUpdate("UPDATE orders\n" +
-                    "SET orders.status = '" + status + "'\n" +
-                    "WHERE orders.order_id = '" + order_id + "'");
+                                                "SET orders.status = '" + status + "'\n" +
+                                                "WHERE orders.order_id = '" + order_id + "'");
 
         } catch (Exception e) {
             System.out.println("Error connecting with database: " + e.getMessage());
