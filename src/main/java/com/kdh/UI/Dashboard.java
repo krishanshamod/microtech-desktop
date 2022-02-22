@@ -1,5 +1,4 @@
 package com.kdh.UI;
-
 import com.kdh.database.DataModifier;
 import com.kdh.database.DataRetriever;
 import com.kdh.database.SQLDatabase;
@@ -21,11 +20,14 @@ public class Dashboard extends javax.swing.JFrame {
     DataModifier dataModifier;
     Connection connection;
     DataRetriever dataRetriever;
+    String userName;
 
     /**
      * Creates new form Dashboard
      */
-    public Dashboard() throws SQLException {
+    public Dashboard(String userName) throws SQLException {
+        this.userName = userName;
+        System.out.println(userName);
         initComponents(); 
         this.sqldatabase = new SQLDatabase("jdbc:mysql://localhost:8889/microtech", "root", "root");
         this.connection = sqldatabase.getConnection();
@@ -35,6 +37,10 @@ public class Dashboard extends javax.swing.JFrame {
         CreateTableColumns();
         AddTableData();
         AddStatisticData();
+    }
+
+    public String getWelcomeStatement() {
+        return "Welcome " + this.userName;
     }
     
     private void AddStatisticData(){
@@ -498,8 +504,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel52.setBackground(new java.awt.Color(204, 204, 255));
         jLabel52.setFont(new java.awt.Font("Lucida Grande", 0, 28)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel52.setText("Welcome!");
-        jPanel9.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 140, 40));
+        jLabel52.setText(getWelcomeStatement());
+        jPanel9.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 350, 40));
 
         jLabel53.setBackground(new java.awt.Color(102, 102, 255));
         jLabel53.setOpaque(true);

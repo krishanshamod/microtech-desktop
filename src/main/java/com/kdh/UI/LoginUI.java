@@ -1,5 +1,4 @@
 package com.kdh.UI;
-
 import com.kdh.database.DataValidator;
 import com.kdh.database.SQLDatabase;
 import java.sql.Connection;
@@ -158,6 +157,7 @@ public class LoginUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
@@ -188,7 +188,8 @@ public class LoginUI extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Dashboard().setVisible(true);
+                    Dashboard dashboard = new Dashboard(userValue);
+                    dashboard.setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
                 }

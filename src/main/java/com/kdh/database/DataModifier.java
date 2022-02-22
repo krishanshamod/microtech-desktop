@@ -1,5 +1,4 @@
 package com.kdh.database;
-
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.sql.Connection;

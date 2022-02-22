@@ -1,9 +1,5 @@
 package com.kdh;
-
 import com.kdh.UI.LoginUI;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class main {
